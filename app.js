@@ -1,6 +1,6 @@
 (async function(){
   try {
-    const n = 8;
+    const n = 9;
     const parts = [];
     for (let i = 0; i < n; i++) {
       const r = await fetch('./b64_' + i + '.txt');
