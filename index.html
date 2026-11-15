@@ -6,7 +6,51 @@
   <title>Smart Display</title>
 </head>
 <body>
-  <p style="font-family:system-ui,sans-serif;padding:24px;color:#888">Loading…</p>
-  <script src="./app.js"></script>
+<script>
+(async function () {
+  try {
+    const parts = [
+"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"
+    ];
+    const b64 = parts.join("");
+    const bin = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    const ds = new DecompressionStream("gzip");
+    const stream = new Blob([bin]).stream().pipeThrough(ds);
+    const text = await new Response(stream).text();
+    document.open();
+    document.write(text);
+    document.close();
+  } catch (e) {
+    document.body.innerHTML = '<pre style="color:#f66;padding:24px;font-family:monospace">Load error: ' + e + '</pre>';
+    console.error(e);
+  }
+})();
+</script>
 </body>
 </html>
