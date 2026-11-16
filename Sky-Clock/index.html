@@ -167,11 +167,23 @@ let month=new Date(),selected=new Date(),events=JSON.parse(localStorage.getItem(
  function move(id,delta){const a=layout.filter(x=>x.visible).sort((x,y)=>x.order-y.order),i=a.findIndex(x=>x.id===id),j=Math.max(0,Math.min(a.length-1,i+delta));if(i<0||i===j)return;[a[i].order,a[j].order]=[a[j].order,a[i].order];save();render()}
  function reorder(from,to){const a=layout.filter(x=>x.visible).sort((x,y)=>x.order-y.order),i=a.findIndex(x=>x.id===from),j=a.findIndex(x=>x.id===to);if(i<0||j<0)return;a.splice(j,0,a.splice(i,1)[0]);a.forEach((x,k)=>x.order=k);save();render()}
  function render(){
-  grid.innerHTML='';layout.filter(x=>x.visible).sort((a,b)=>a.order-b.order).forEach(x=>{const c=nodes[x.id];c.dataset.size=x.size;c.querySelector('select').value=x.size;c.draggable=editing;grid.append(c)});
-  if(!layout.some(x=>x.visible)){const e=document.createElement('div');e.className='widget-empty';e.textContent='ウィジェットがありません。「＋ 追加」から追加してください。';grid.append(e)}
-  addList.innerHTML='';layout.filter(x=>!x.visible).forEach(x=>{const b=document.createElement('button');b.textContent='＋ '+meta[x.id];b.onclick=()=>{x.visible=true;save();render()};addList.append(b)});
-  $('widgetAddToggle').hidden=!editing;$('widgetReset').hidden=!editing;$('widgetModeHint').textContent=editing?'編集モード：並べ替え・サイズ変更・追加・削除ができます':'編集ボタンからホーム画面をカスタマイズできます';
-  grid.classList.toggle('widget-editing',editing);editBtn.textContent=editing?'完了':'編集';editBtn.setAttribute('aria-pressed',String(editing));panel.classList.remove('open');
+  const visible=layout.filter(x=>x.visible).sort((a,b)=>a.order-b.order);
+  const cards=visible.map(x=>({item:x,node:nodes[x.id]})).filter(x=>x.node);
+  grid.replaceChildren();
+  cards.forEach(({item:x,node:c})=>{
+   c.dataset.size=x.size;
+   const sizeControl=c.querySelector('select');
+   if(sizeControl)sizeControl.value=x.size;
+   c.draggable=editing;
+   grid.append(c);
+  });
+  if(!cards.length){const e=document.createElement('div');e.className='widget-empty';e.textContent='ウィジェットがありません。「＋ 追加」から追加してください。';grid.append(e)}
+  addList.innerHTML='';
+  layout.filter(x=>!x.visible).forEach(x=>{const b=document.createElement('button');b.textContent='＋ '+meta[x.id];b.onclick=()=>{x.visible=true;save();render()};addList.append(b)});
+  $('widgetAddToggle').hidden=!editing;$('widgetReset').hidden=!editing;
+  $('widgetModeHint').textContent=editing?'編集モード：並べ替え・サイズ変更・追加・削除ができます':'編集ボタンからホーム画面をカスタマイズできます';
+  grid.classList.toggle('widget-editing',editing);editBtn.textContent=editing?'完了':'編集';
+  editBtn.setAttribute('aria-pressed',String(editing));panel.classList.remove('open');
  }
  editBtn.onclick=()=>{editing=!editing;render()};$('widgetAddToggle').onclick=()=>panel.classList.toggle('open');
  $('widgetReset').onclick=()=>{if(confirm('ウィジェットの配置を初期状態に戻しますか？')){layout=defaults.map(x=>({...x}));save();render()}};
