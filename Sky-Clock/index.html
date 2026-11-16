@@ -7,6 +7,57 @@
 <title>Sky Clock</title>
 <style>
 :root{--ink:#fff;--soft:rgba(255,255,255,.72);--glass:rgba(255,255,255,.12);--edge:rgba(255,255,255,.22);font-family:Inter,"Yu Gothic UI","Hiragino Sans",sans-serif;color:var(--ink);color-scheme:dark}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#081329}body{min-height:100svh;overflow-x:hidden}.scene{position:fixed;inset:0;z-index:0;opacity:0;transition:opacity 1.8s;pointer-events:none}.scene.on{opacity:1}#dawn{background:linear-gradient(180deg,#292957,#a8587c 56%,#f5b47f)}#day{background:linear-gradient(180deg,#1768b7,#69b8e9 58%,#d8efff)}#dusk{background:linear-gradient(180deg,#29244f,#d45b66 58%,#ffb66f)}#night{background:linear-gradient(180deg,#030711,#10234c 65%,#343b78)}#rain{background:linear-gradient(180deg,#1c2937,#40515f 65%,#71818c)}#snow{background:linear-gradient(180deg,#526b88,#9eb5cc 65%,#e3edf5)}#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}.orb{position:fixed;width:min(34vmin,250px);aspect-ratio:1;border-radius:50%;opacity:0;z-index:1;transition:all 2s;pointer-events:none}.sun{background:radial-gradient(circle,#fff9dc 0 28%,#ffd36b 49%,transparent 73%)}.moon{background:radial-gradient(circle at 38% 38%,#fff 0 30%,#dfe6ff 53%,transparent 75%)}.cloud{position:fixed;z-index:1;left:-40vw;width:60vw;height:15vmin;border-radius:50%;background:#ffffff25;filter:blur(22px);animation:drift 140s linear infinite;pointer-events:none}.cloud:nth-of-type(2){top:16%}.cloud:nth-of-type(3){top:34%;animation-duration:170s;animation-delay:-60s}.cloud:nth-of-type(4){top:8%;animation-duration:200s;animation-delay:-120s}@keyframes drift{to{transform:translateX(200vw)}}.app{position:relative;z-index:2;min-height:100svh;display:grid;grid-template-columns:238px minmax(0,1fr);gap:22px;padding:18px;max-width:1600px;margin:auto}.sidebar,.mobilebar,.glass{background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 12px 45px #06112618}.sidebar{border-radius:28px;padding:22px 14px;display:flex;flex-direction:column;min-height:calc(100svh - 36px)}.brand{display:flex;align-items:center;gap:11px;padding:4px 10px 24px}.brandmark{width:38px;height:38px;border-radius:13px;background:#ffffff25;display:grid;place-items:center;font-size:21px}.brand strong{font-size:17px}.brand small{display:block;color:var(--soft);font-size:10px;letter-spacing:.12em;margin-top:2px}.navlabel{font-size:10px;letter-spacing:.16em;color:#ffffff88;padding:10px 12px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:#ffffffc9;text-align:left;font:inherit;padding:12px;border-radius:14px;display:flex;align-items:center;gap:12px;cursor:pointer}.nav button:hover,.nav button.active{background:#ffffff26;color:#fff}.nav .ico{width:22px;text-align:center;font-size:17px}.sidefoot{margin-top:auto;padding:14px 10px 2px;color:#ffffff8a;font-size:11px;line-height:1.7}main{min-width:0;display:flex;flex-direction:column;gap:16px;padding:4px 4px 20px}.topbar{display:flex;justify-content:space-between;align-items:center;min-height:48px}.eyebrow{font-size:11px;letter-spacing:.18em;color:var(--soft)}.topright{display:flex;gap:9px;align-items:center}.iconbtn{width:40px;height:40px;border-radius:14px;border:1px solid var(--edge);background:#ffffff16;color:white;font-size:17px;cursor:pointer}.page{display:none;animation:fade .35s}.page.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.homehero{min-height:clamp(330px,54vh,600px);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:28px 10px 36px}.hello{font-size:clamp(14px,2vw,20px);color:var(--soft);letter-spacing:.1em;margin-bottom:12px}.time{font-family:Arial,sans-serif;font-weight:200;font-size:clamp(76px,15vw,190px);line-height:.95;letter-spacing:-.055em;text-shadow:0 8px 60px #0003;font-variant-numeric:tabular-nums}.time .sec{font-size:.25em;margin-left:.15em;color:var(--soft)}.date{font-size:clamp(15px,2vw,21px);color:var(--soft);margin-top:22px;letter-spacing:.08em}.scenechips{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:25px}.scenechips button,.pill{border:1px solid var(--edge);background:#ffffff16;color:#fff;border-radius:99px;padding:8px 14px;font:inherit;font-size:12px;cursor:pointer}.scenechips button[aria-pressed=true],.pill.selected{background:#ffffff40}.weatherstrip{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:14px;padding:18px 22px;border-radius:25px}.currentweather{display:flex;align-items:center;gap:15px}.weathericon{font-size:42px}.temp{font-size:42px;font-weight:300}.muted{color:var(--soft)}.forecast{display:flex;justify-content:space-around;align-items:center;border-left:1px solid var(--edge);padding-left:14px;gap:8px}.forecast div{text-align:center;font-size:12px;color:var(--soft);display:grid;gap:5px}.forecast b{font-size:16px;color:#fff;font-weight:400}.note{text-align:center;color:#ffffff80;font-size:10px;margin-top:8px}.pagehead{margin:14px 0 22px}.pagehead h1{font-size:clamp(26px,4vw,38px);font-weight:400;margin:0 0 7px}.pagehead p{margin:0;color:var(--soft);font-size:13px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:14px}.card{border-radius:23px;padding:20px;min-height:130px}.card h3{font-weight:500;margin:0 0 8px;font-size:15px}.card p{font-size:12px;color:var(--soft);line-height:1.7;margin:0}.bigvalue{font-size:34px;font-weight:300;margin:12px 0}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.between{justify-content:space-between}.control{background:#ffffff18;border:1px solid var(--edge);border-radius:13px;color:white;padding:11px 13px;font:inherit;min-height:42px}.control::placeholder{color:#ffffff80}select.control option{color:#15213b}input[type=number]{width:90px}button.primary{background:#e5f5ff;color:#173253;border:0;border-radius:13px;padding:11px 17px;font:inherit;font-weight:600;cursor:pointer}button.secondary{background:#ffffff20;color:#fff;border:1px solid var(--edge);border-radius:13px;padding:10px 15px;font:inherit;cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid white;outline-offset:3px}.tooltime{font-size:clamp(38px,8vw,66px);font-weight:300;font-variant-numeric:tabular-nums;margin:18px 0}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.calday{padding:12px 3px;text-align:center;border-radius:12px;background:#ffffff10;font-size:13px;min-height:42px}.calday.today{background:#ffffff45;outline:1px solid #ffffff80}.calday.head{background:transparent;color:var(--soft);min-height:25px}.settingrow{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 0;border-bottom:1px solid #ffffff24}.settingrow:last-child{border:0}.settingrow strong{font-size:14px;font-weight:500}.settingrow small{display:block;color:var(--soft);font-size:11px;margin-top:4px}.mobilebar{display:none}@media(max-width:760px){.app{display:block;padding:12px 12px calc(86px + env(safe-area-inset-bottom))}.sidebar{display:none}main{padding:0;gap:10px}.topbar{padding:3px 4px}.mobilebar{display:grid;position:fixed;z-index:10;bottom:calc(9px + env(safe-area-inset-bottom));left:10px;right:10px;grid-template-columns:repeat(6,1fr);gap:2px;padding:7px;border-radius:22px}.mobilebar button{border:0;background:transparent;color:#ffffffb8;border-radius:14px;padding:7px 2px;font-size:10px;display:grid;gap:3px;justify-items:center}.mobilebar button span{font-size:18px}.mobilebar button.active{background:#ffffff30;color:#fff}.homehero{min-height:48svh;padding:22px 4px}.time{font-size:clamp(70px,20vw,125px)}.weatherstrip{grid-template-columns:1fr;padding:16px}.currentweather{justify-content:center}.forecast{border-left:0;border-top:1px solid var(--edge);padding:13px 0 0}.scenechips{margin-top:20px}.pagehead{margin:12px 3px 18px}.card{padding:17px}.settingrow{align-items:flex-start}.settingrow .control{max-width:48%}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Mobile refinement v1.0.1 */
+@media (max-width:760px){
+  html,body{width:100%;overflow-x:hidden}
+  .app{padding:calc(10px + env(safe-area-inset-top)) 12px calc(112px + env(safe-area-inset-bottom))}
+  main{gap:8px}
+  .topbar{min-height:42px}
+  .eyebrow{font-size:10px;letter-spacing:.14em}
+  .topright{gap:6px}
+  .iconbtn{width:36px;height:36px}
+  .homehero{min-height:0;padding:clamp(34px,8vh,72px) 2px 28px}
+  .hello{font-size:15px;margin-bottom:10px}
+  .time{font-size:clamp(66px,18vw,112px);letter-spacing:-.06em}
+  .date{font-size:15px;margin-top:15px}
+  .scenechips{width:100%;justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;padding:3px 2px 9px;margin-top:20px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .scenechips::-webkit-scrollbar{display:none}
+  .scenechips button{flex:0 0 auto;padding:9px 15px;font-size:13px;min-height:40px}
+  .weatherstrip{width:100%;max-width:none;grid-template-columns:1fr;gap:12px;padding:17px 15px;border-radius:22px}
+  .currentweather{justify-content:center;gap:12px}
+  .weathericon{font-size:36px}
+  .temp{font-size:38px}
+  .forecast{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-left:0;border-top:1px solid var(--edge);padding:13px 0 0;gap:3px}
+  .forecast div{font-size:10px;min-width:0}
+  .forecast b{font-size:17px}
+  .note{font-size:10px;line-height:1.6;padding:0 8px;margin:8px 0 10px}
+  .mobilebar{left:9px;right:9px;bottom:calc(8px + env(safe-area-inset-bottom));padding:6px;min-height:68px;border-radius:20px;grid-template-columns:repeat(6,minmax(0,1fr));box-shadow:0 8px 30px #0003}
+  .mobilebar button{min-width:0;padding:7px 1px;font-size:9px;white-space:nowrap}
+  .mobilebar button span{font-size:17px;line-height:1.1}
+  .pagehead{margin:14px 3px 18px}
+  .pagehead p{line-height:1.7}
+  .cards{grid-template-columns:minmax(0,1fr);gap:12px}
+  .card{min-width:0;padding:17px;border-radius:20px}
+  .tooltime{font-size:clamp(38px,10vw,58px)}
+  .calendar{gap:4px}
+  .calday{padding:10px 1px;min-height:39px;font-size:12px}
+  .settingrow{gap:12px}
+  .settingrow>div{min-width:0;flex:1}
+  .settingrow .control{max-width:48%;min-width:110px}
+}
+@media (max-width:380px){
+  .app{padding-left:9px;padding-right:9px}
+  .time{font-size:clamp(60px,17.5vw,76px)}
+  .mobilebar button{font-size:8px}
+  .scenechips button{padding:8px 12px}
+  .forecast b{font-size:15px}
+}
+@media (max-height:700px) and (max-width:760px){
+  .homehero{padding-top:24px;padding-bottom:18px}
+  .scenechips{margin-top:14px}
+}
+
 </style>
 </head>
 <body>
